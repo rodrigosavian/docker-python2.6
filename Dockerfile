@@ -2,7 +2,7 @@
 #
 # VERSION               1.0
 
-FROM pubdesign/servidor:latest
+FROM pubdesign/server:latest
 MAINTAINER Rodrigo Savian <rodrigosavian@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
