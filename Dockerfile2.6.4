@@ -1,0 +1,27 @@
+# Python
+#
+# VERSION               1.0
+
+FROM pubdesign/servidor:latest
+MAINTAINER Rodrigo Savian <rodrigosavian@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV INITRD No
+
+RUN apt-get update && apt-get upgrade -y
+# RUN apt-get install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1 liblcms1-dev liblcms-utils tk-dev libbz2-dev libssl-dev libncursesw5-dev libncurses5-dev libsqlite3-dev libc6-dev sqlite3 libpcap-dev libreadline-dev libgdbm-dev liblzma-dev
+
+RUN add-apt-repository ppa:fkrull/deadsnakes -y
+RUN apt-get update -y
+RUN apt-get install python2.6 python2.6-dev -y
+
+WORKDIR /tmp
+RUN wget https://www.python.org/ftp/python/2.6.4/Python-2.6.4.tgz
+RUN tar xf /tmp/Python-2.6.4.tgz
+
+WORKDIR /tmp/Python-2.6.4
+RUN ./configure --prefix=/usr/local
+RUN make && make altinstall
+
+RUN apt-get clean
+RUN rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
